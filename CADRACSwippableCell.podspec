@@ -12,6 +12,6 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.source       = { :git => "https://github.com/TopicSo/CADRACSwippableCell.git", :tag => "0.0.1" }
   s.source_files  = 'Source'
-  s.dependency 'ReactiveCocoa', '3.0.0-swift2'
+  s.dependency 'ReactiveCocoa', '4.0.4-alpha-4'
 
 end
