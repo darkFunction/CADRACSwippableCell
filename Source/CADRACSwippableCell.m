@@ -11,7 +11,7 @@
 #import "UIColor+CADRACSwippableCellAdditions.h"
 #import "UIView+CADRACSwippableCellAdditions.h"
 
-#import <ReactiveCocoa/ReactiveCocoa.h>
+@import ReactiveCocoa;
 
 @interface CADRACSwippableCell () <UIGestureRecognizerDelegate>
 
