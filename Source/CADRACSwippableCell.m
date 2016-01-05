@@ -73,14 +73,14 @@
     }];
     
     [[endedOrCancelledSignal filter:^BOOL(UIPanGestureRecognizer *gestureRecognizer) {
-        return fabsf(CGRectGetMinX(self.contentSnapshotView.frame)) >= CGRectGetWidth(self.revealView.frame)/2 ||
+        return fabs(CGRectGetMinX(self.contentSnapshotView.frame)) >= CGRectGetWidth(self.revealView.frame)/2 ||
                [self shouldShowRevealViewForVelocity:[gestureRecognizer velocityInView:self]];
     }] subscribeNext:^(id x) {
         [self showRevealViewAnimated:YES];
     }];
     
     [[endedOrCancelledSignal filter:^BOOL(UIPanGestureRecognizer *gestureRecognizer) {
-        return fabsf(CGRectGetMinX(self.contentSnapshotView.frame)) < CGRectGetWidth(self.revealView.frame)/2 ||
+        return fabs(CGRectGetMinX(self.contentSnapshotView.frame)) < CGRectGetWidth(self.revealView.frame)/2 ||
                [self shouldHideRevealViewForVelocity:[gestureRecognizer velocityInView:self]];
     }] subscribeNext:^(id x) {
         [self hideRevealViewAnimated:YES];
@@ -178,7 +178,7 @@
 - (BOOL)shouldShowRevealViewForVelocity:(CGPoint)velocity
 {
     BOOL shouldShow = NO,
-         velocityIsBiggerThanOffset = fabsf(velocity.x) > CGRectGetWidth(self.revealView.frame)/2;
+         velocityIsBiggerThanOffset = fabs(velocity.x) > CGRectGetWidth(self.revealView.frame)/2;
     
     switch (self.allowedDirection)
     {
@@ -197,7 +197,7 @@
 - (BOOL)shouldHideRevealViewForVelocity:(CGPoint)velocity
 {
     BOOL shouldHide = NO,
-         velocityIsBiggerThanOffset = fabsf(velocity.x) > CGRectGetWidth(self.revealView.frame)/2;
+         velocityIsBiggerThanOffset = fabs(velocity.x) > CGRectGetWidth(self.revealView.frame)/2;
     
     switch (self.allowedDirection)
     {
@@ -242,7 +242,7 @@
         UIPanGestureRecognizer *gesture = (UIPanGestureRecognizer *)gestureRecognizer;
         CGPoint point = [gesture velocityInView:self];
         
-        if (fabsf(point.x) > fabsf(point.y))
+        if (fabs(point.x) > fabs(point.y))
         {
             return YES;
         }
