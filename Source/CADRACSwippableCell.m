@@ -13,7 +13,10 @@
 
 @import ReactiveCocoa.ReactiveCocoa;
 
-@interface CADRACSwippableCell () <UIGestureRecognizerDelegate>
+@interface CADRACSwippableCell () <UIGestureRecognizerDelegate>{
+    BOOL canSnapshottingView;
+}
+
 
 @property (nonatomic, strong) RACSubject *revealViewSignal;
 @property (nonatomic, strong) UIView *contentSnapshotView;
@@ -49,6 +52,7 @@
 - (void)setupView
 {
     self.revealViewSignal = [RACSubject subject];
+    canSnapshottingView = false;
     
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:nil];
     panGesture.delegate = self;
@@ -116,6 +120,7 @@
 - (void)layoutSubviews
 {
     [super layoutSubviews];
+    canSnapshottingView = true;
     
     self.revealView.frame = (CGRect){
         .origin = CGPointMake(self.allowedDirection == CADRACSwippableCellAllowedDirectionRight ? 0.0f : CGRectGetWidth(self.frame) - CGRectGetWidth(self.revealView.frame), 0.0f),
@@ -263,7 +268,7 @@
 
 - (UIView *)contentSnapshotView
 {
-    if (!_contentSnapshotView)
+    if (!_contentSnapshotView && canSnapshottingView)
     {
         _contentSnapshotView = [self snapshotViewAfterScreenUpdates:NO];
         _contentSnapshotView.backgroundColor = [UIColor firstNonClearBackgroundColorInHierarchyForView:self];
