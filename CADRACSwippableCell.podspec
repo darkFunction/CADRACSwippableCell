@@ -8,10 +8,11 @@ Pod::Spec.new do |s|
   s.license      = { :type => 'MIT', :file => 'LICENSE' }
 
   s.author             = { "Joan Romano" => "joanromano@gmail.com" }
-  s.platform     = :ios, '8.0'
+  s.platform     = :ios, '9.0'
   s.requires_arc = true
   s.source       = { :git => "https://github.com/TopicSo/CADRACSwippableCell.git", :tag => "0.0.1" }
   s.source_files  = 'Source'
-  s.dependency 'ReactiveCocoa', '4.0.4-alpha-4'
+
+s.dependency 'ReactiveObjC'
 
 end

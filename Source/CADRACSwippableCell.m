@@ -11,7 +11,7 @@
 #import "UIColor+CADRACSwippableCellAdditions.h"
 #import "UIView+CADRACSwippableCellAdditions.h"
 
-@import ReactiveCocoa.ReactiveCocoa;
+@import ReactiveObjC;
 
 @interface CADRACSwippableCell () <UIGestureRecognizerDelegate>{
     BOOL canSnapshottingView;
