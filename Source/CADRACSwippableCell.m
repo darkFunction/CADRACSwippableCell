@@ -159,25 +159,18 @@
                          self.contentSnapshotView.center = CGPointMake(CGRectGetWidth(self.frame)/2, self.contentSnapshotView.center.y);
                      }
                      completion:^(BOOL finished) {
-                         [UIView animateWithDuration:animated ? 0.1 : 0.0
-                                               delay:0.0f
-                                             options:UIViewAnimationOptionCurveLinear
-                                          animations:^{
-                                              self.contentSnapshotView.center = CGPointMake(self.allowedDirection == CADRACSwippableCellAllowedDirectionRight ? self.center.x+2.0f : self.center.x-2.0f, self.contentSnapshotView.center.y);
-                                          } completion:^(BOOL finished) {
-                                              [UIView animateWithDuration:animated ? 0.1 : 0.0
-                                                                    delay:0.0f
-                                                                  options:UIViewAnimationOptionCurveLinear
-                                                               animations:^{
-                                                                   self.contentSnapshotView.center = CGPointMake(CGRectGetWidth(self.frame)/2, self.contentSnapshotView.center.y);
-                                                               }
-                                                               completion:^(BOOL finished) {
-                                                                   [(RACSubject *)self.revealViewSignal sendNext:@(NO)];
-                                                                   [self.contentSnapshotView removeFromSuperview];
-                                                                   self.contentSnapshotView = nil;
-                                                                   [self.revealView removeFromSuperview];
-                                                               }];
-                                          }];
+                     	[UIView animateWithDuration:animated ? 0.1 : 0.0
+                       		delay:0.0f
+                            options:UIViewAnimationOptionCurveLinear
+                            animations:^{
+                            	self.contentSnapshotView.center = CGPointMake(CGRectGetWidth(self.frame)/2, self.contentSnapshotView.center.y);
+                            }
+                            completion:^(BOOL finished) {
+                                [(RACSubject *)self.revealViewSignal sendNext:@(NO)];
+                                [self.contentSnapshotView removeFromSuperview];
+                                self.contentSnapshotView = nil;
+                                [self.revealView removeFromSuperview];
+                            }];
                      }];
 }
 
