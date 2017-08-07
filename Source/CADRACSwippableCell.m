@@ -263,6 +263,10 @@
 
 - (UIView *)contentSnapshotView
 {
+	if (!_revealView) {
+		return nil;
+	}
+
     if (!_contentSnapshotView && canSnapshottingView)
     {
         _contentSnapshotView = [self snapshotViewAfterScreenUpdates:NO];
