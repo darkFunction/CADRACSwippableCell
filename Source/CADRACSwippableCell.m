@@ -107,7 +107,7 @@
     [[[self rac_signalForSelector:@selector(updateConstraints)] filter:^BOOL(id value) {
         return weakSelf.contentSnapshotView != nil;
     }] subscribeNext:^(id x) {
-		if ( weakSelf.contentSnapshotView.superview ) {
+		if ( weakSelf.contentSnapshotView.superview == weakSelf ) {
 	        NSDictionary *bind = @{@"contentSnapshotView":weakSelf.contentSnapshotView};
 	        [weakSelf.contentSnapshotView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[contentSnapshotView]|" options:0 metrics:nil views:bind]];
 	        [weakSelf.contentSnapshotView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[contentSnapshotView]|" options:0 metrics:nil views:bind]];
