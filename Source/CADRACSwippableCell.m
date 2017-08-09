@@ -20,6 +20,7 @@
 
 @property (nonatomic, strong) RACSubject *revealViewSignal;
 @property (nonatomic, strong) UIView *contentSnapshotView;
+@property (nonatomic, assign) BOOL revealViewShown;
 
 @end
 
@@ -95,15 +96,7 @@
     [[RACSignal merge:@[RACObserve(weakSelf, allowedDirection), RACObserve(weakSelf, revealView)]] subscribeNext:^(id x) {
         [weakSelf setNeedsLayout];
     }];
-    
-    [[self rac_prepareForReuseSignal] subscribeNext:^(id x) {
-        [weakSelf.contentSnapshotView removeFromSuperview];
-        weakSelf.contentSnapshotView = nil;
-        
-        [weakSelf.revealView removeFromSuperview];
-        weakSelf.revealView = nil;
-    }];
-    
+	
     [[[self rac_signalForSelector:@selector(updateConstraints)] filter:^BOOL(id value) {
         return weakSelf.contentSnapshotView != nil;
     }] subscribeNext:^(id x) {
@@ -134,6 +127,11 @@
 
 - (void)showRevealViewAnimated:(BOOL)animated
 {
+	if (self.revealViewShown) {
+		return;
+	}
+	
+	self.revealViewShown = YES;
     [UIView animateWithDuration:animated ? 0.1 : 0.0
                           delay:0.0f
                         options:UIViewAnimationOptionCurveEaseOut
@@ -151,6 +149,11 @@
 
 - (void)hideRevealViewAnimated:(BOOL)animated
 {
+	if (!self.revealViewShown) {
+		return;
+	}
+	
+	self.revealViewShown = NO;
     if (CGPointEqualToPoint(self.contentSnapshotView.center, self.contentView.center))
         return;
     
