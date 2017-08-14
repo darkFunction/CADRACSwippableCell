@@ -279,4 +279,11 @@
     return _contentSnapshotView;
 }
 
+
+- (void)prepareForReuse {
+	[super prepareForReuse];
+	
+	[self hideRevealViewAnimated:NO];
+}
+
 @end
